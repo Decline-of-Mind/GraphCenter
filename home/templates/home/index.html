@@ -1,8 +1,34 @@
 {% extends "base.html" %}
 {% load static %}
+{% block page_header %}
+<!-- <div class="container header-container">
+  <div class="row">
+    <div class="col"></div>
+  </div>
+</div> -->
+{% endblock %}
 
 {% block content %}
 
-<h1 class="display-4 text-success">Hello</h1>
-
+<div class="container home-container h-100">
+  <div class="row home-row h-100 mt-5">
+        <div class="col-7 col-md-9 my-auto">
+            <h1 class="display-4 logo-font">
+                GraphCenter
+            </h1>
+        <hr>
+            <div class="my-5 logo-font text-black">
+                <h2>Materialize your Vision</h2>
+                <h4 class="text-black">
+                    Our designers here at GraphCenter are some of the finest in the industry. Let us guide you from the conceptual phase to a creative and well-made graphical design!
+                </h4>
+                <a
+            href=""
+            class="shop-now-button btn btn-lg mt-5 rounded-0 text-uppercase py-3"
+            >Shopdude</a
+          >
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
