@@ -36,7 +36,6 @@
     <body>
         {% include 'partials/navbar.html' %}
         
-        {% include 'partials/mobile-top-header.html' %}
 
         {% include 'partials/main-nav.html' %}
 
@@ -48,9 +47,11 @@
         {% endif %}
 
         {% block page_header %}
-        {% endblock %} 
+        {% endblock %}
+        
 
         {% block content %}
+
         {% endblock %}
 
         {% include 'partials/footer.html' %}
