@@ -1,1 +1,1 @@
-web: gunicorn graphcenter.wsgi
+web: gunicorn graphcenter.wsgi:application
