@@ -28,7 +28,9 @@ SECRET_KEY = '3jn(&p!&w+mhpf(u(89+dzj)8jjyd$egd1$qeb4p58vq0=%ef@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'graphcenter.herokuapp.com']
 
 
 # Application definition
