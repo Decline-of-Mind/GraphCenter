@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+
+.logo-font{
+    font-family: 'Russo', sans-serif !important;
+}
+
+.yellow-background {
+    background-color: #E0FF4F !important;
+}
+
+.yellow-color {
+    color: #E0FF4F !important;
+}
+
+.black-background {
+    background-color: #00272b !important;
+}
+
+.black-color {
+    color: #00272b !important;
+}
+
+.red-background {
+    background-color: #FF6663;
+}
+
+.red-color {
+    color: #FF6663 !important;
+}
+
+.main-nav {
+    margin-top: 80px;
+}
+
+
+
+/* Nav and dropdown dynamic responses */
+
+.nav-item:hover,
+.nav-item:active,
+.nav-item:focus {
+    background-color: #A51080;
+    color: #FF6663 !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:active,
+.dropdown-item:focus {
+    background-color: #A51080;
+    color: #E0FF4F !important;
+}
+
+
+/* .footer-row {
+    padding-top: 30px;
+} */
+
+/* fixed top navbar only on medium and up */ 
+/* @media (min-width: 992px) {
+    .fixed-top-desktop-only {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+
+    .header-container {
+        padding-top: 164px;
+    }
+}  */
+
+/* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 991px) {
+    .home-container {
+        margin-top: 40px;
+        padding-top: 60px;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    body {
+        height: 100vh;
+        width: 100vw;
+    }
+}
+
