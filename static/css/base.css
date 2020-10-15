@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
-
 .logo-font{
     font-family: 'Russo', sans-serif !important;
 }
-
+/* primary */
 .yellow-background {
     background-color: #E0FF4F !important;
 }
@@ -12,13 +11,17 @@
 .yellow-color {
     color: #E0FF4F !important;
 }
-
+/* secondary */
 .black-background {
     background-color: #00272b !important;
 }
 
 .black-color {
     color: #00272b !important;
+}
+/* Additional */
+.white-color {
+    color: white !important;
 }
 
 .red-background {
@@ -40,39 +43,51 @@
 .nav-item:hover,
 .nav-item:active,
 .nav-item:focus {
-    background-color: #A51080;
-    color: #FF6663 !important;
+    background-color: #00203FFF;
+    color: #E0FF4F !important;
+    border: 1px solid #E0FF4F;
 }
 
 .dropdown-item:hover,
 .dropdown-item:active,
 .dropdown-item:focus {
-    background-color: #A51080;
+    background-color:#00203FFF;
     color: #E0FF4F !important;
+    border: 1px solid #E0FF4F;
+}
+
+/* Index.html */
+
+.home-container {
+    background: url("../img/home.jpg") no-repeat center center fixed;
+    margin-top: 60px;
+    height: 700px;
+    width: 100vw;
+}
+
+.pop-services-button:hover,
+.pop-services-button:active,
+.pop-services-button:focus {
+    background-color:#00203FFF;
+    color: #E0FF4F !important;
+    border: 1px solid #E0FF4F;
 }
 
 
-/* .footer-row {
-    padding-top: 30px;
-} */
+/* additional tools */
+.hr-white {
+    /* so it works in every browser type */
+    border-color: white; 
+    background-color: white;
+    color: white;
+}
 
-/* fixed top navbar only on medium and up */ 
-/* @media (min-width: 992px) {
-    .fixed-top-desktop-only {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1030;
-    }
 
-    .header-container {
-        padding-top: 164px;
-    }
-}  */
+
+
 
 /* pad the top a bit when navbar is collapsed on mobile */
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     .home-container {
         margin-top: 40px;
         padding-top: 60px;
@@ -85,4 +100,4 @@
         width: 100vw;
     }
 }
-
+ */

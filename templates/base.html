@@ -29,15 +29,15 @@
     {% endblock %}
 
     {% block extra_js %}
+
     {% endblock %}
 
     <title>GraphCenter {% block extra_title %}{% endblock %}</title>
   </head>
     <body>
-        {% include 'partials/navbar.html' %}
+        {% include 'partials/_navbar.html' %}
         
 
-        {% include 'partials/main-nav.html' %}
 
 
 
@@ -58,6 +58,19 @@
 
 
         {% block postloadjs %}
+        <!-- Remove Text center from view lower than large -->
+        <script>
+            // toggles classes when screen changes. addClass only needed for developer and assessors.
+            $(window).resize(function(){
+
+                if($(window).width() <= 991){
+                    $('.toggle-center').removeClass('text-center');
+                    }
+                if($(window).width() > 991){
+                    $('.toggle-center').addClass('text-center');
+                    }
+                });
+        </script>
         {% endblock %}
 
 
