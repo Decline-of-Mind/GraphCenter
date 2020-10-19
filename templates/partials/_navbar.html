@@ -96,3 +96,22 @@
         </ul>
     </div>
 </nav>
+ <!-- Remove Text center from view lower than large -->
+<script>
+    // toggles classes when screen changes. only needed for developer and assessors.
+    $(window).resize(function(){
+        if($(window).width() <= 991){
+            $('.toggle-center').removeClass('text-center');
+            }
+        if($(window).width() > 991){
+            $('.toggle-center').addClass('text-center');
+            }
+    });
+    // Toggles classes when site is loaded.
+        if($(window).width() <= 991){
+            $('.toggle-center').removeClass('text-center');
+            }
+        if($(window).width() > 991){
+            $('.toggle-center').addClass('text-center');
+            }
+</script>

@@ -58,19 +58,7 @@
 
 
         {% block postloadjs %}
-        <!-- Remove Text center from view lower than large -->
-        <script>
-            // toggles classes when screen changes. addClass only needed for developer and assessors.
-            $(window).resize(function(){
 
-                if($(window).width() <= 991){
-                    $('.toggle-center').removeClass('text-center');
-                    }
-                if($(window).width() > 991){
-                    $('.toggle-center').addClass('text-center');
-                    }
-                });
-        </script>
         {% endblock %}
 
 
