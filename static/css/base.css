@@ -47,6 +47,17 @@ html {
     color: #FF6663 !important;
 }
 
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: #00203FFF;
+    z-index: -1;
+}
+
 /* navigation */
 .main-nav {
     margin-top: 80px;
