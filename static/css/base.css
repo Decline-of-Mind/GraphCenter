@@ -39,6 +39,10 @@ html {
     color: white !important;
 }
 
+.purple-background {
+    background-color: #00203FFF;
+}
+
 .red-background {
     background-color: #FF6663;
 }
@@ -48,7 +52,7 @@ html {
 }
 
 
-.overlay {
+/* .overlay {
     height: 100%;
     width: 100%;
     top: 0;
@@ -56,7 +60,7 @@ html {
     position: fixed;
     background-color: #00203FFF;
     z-index: -1;
-}
+} */
 
 /* navigation */
 .main-nav {
@@ -103,6 +107,19 @@ html {
     border: 1px solid #E0FF4F;
 }
 
+
+
+/* Services.html */
+
+.service-container {
+    margin-top: 80px;
+}
+
+.card-image-container {
+    height: 650px;
+    object-fit: fill;
+    overflow: hidden;
+}
 
 /* additional tools */
 .hr-white {
