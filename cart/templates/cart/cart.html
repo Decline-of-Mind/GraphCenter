@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="overlay"></div>
+<section id="cart">
+    <div class="container mt-5 pt-3">
+
+    <!-- Cart with Services -->
+    <div class="cart-container">
+        {% if cart_items %}
+        <table class="no-wrap table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Cart</th>
+                    <th class="">Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="lead mt-5 yellow-color font-weight-bold">Your Cart is Empty</p>
+    <a href="{% url 'services' %}" class="btn red-background rounded-4 text-white btn-lg">
+        <span class="icon">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+    <strong>Back to Services</strong></a>
+    {% endif %}
+
+
+    </div>
+</section>
+{% endblock %}
