@@ -7,8 +7,8 @@
 {% block content %}
 
 <div class="container-fluid home-container">
-  <div class="row home-row h-100 mx-3">
-        <div class="col-12 col-md-9 my-auto">
+  <div class="row home-row h-100 mx-2">
+        <div class="col-12 col-md-12 my-auto">
             <h1 class="display-4 yellow-color">
                 Materialize your vision!
             </h1>
@@ -18,7 +18,7 @@
                     Our designers here at GraphCenter are some of the finest in the industry. Let us guide you from the conceptual phase to a creative and well-made graphical design!
                 </h4>
             <a
-            href=""
+            href="{% url 'services' %}"
             class="pop-services-button btn btn-lg red-background white-color mt-5 rounded-4 py-3"
             ><strong>Popular Services</strong></a>
             </div>
@@ -31,10 +31,10 @@
             <h1 class="my-4">About us</h1>
             <hr class="hr-white">
         </div>
-        <div class="col-12 col-md-2">
+        <div class="d-none d-lg-block col-lg-2">
             <img src="../static/img/about-us-small.png" alt="">
         </div>
-        <div class="col-12 col-md-10 my-4">
+        <div class="col-12 col-lg-10">
             <p class="yellow-color">
                 <strong>
                     Here at GraphCenter, creativity, dilligence and synergy are the core of our company philosophy. 

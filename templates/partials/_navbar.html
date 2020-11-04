@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark black-background fixed-top">
     <!-- Logo left side of navbar -->
-    <a class="navbar-brand" aria-label="Brand Logo & refresh link" href="">
+    <a class="navbar-brand" aria-label="Brand Logo & refresh link" href="{% url 'home' %}">
         <h1 class="logo-font yellow-color"><strong>Graph</strong>Center</h1>
     </a>
     <!-- toggler button -->
@@ -18,11 +18,11 @@
                 Services
                 </a>
                 <div class="dropdown-menu black-background border-0" aria-labelledby="all-services-link">
-                    <a href="" class="dropdown-item yellow-color">Vectors</a>
-                    <a href="" class="dropdown-item yellow-color">Logos</a>
-                    <a href="" class="dropdown-item yellow-color">Graphical Enhancement</a>
-                    <a href="" class="dropdown-item yellow-color">Brand Design</a>
-                    <a href="" class="dropdown-item yellow-color">All Services</a>
+                    <a href="{% url 'services' %}?category=vector" class="dropdown-item yellow-color">Vectors</a>
+                    <a href="{% url 'services' %}?category=logo" class="dropdown-item yellow-color">Logos</a>
+                    <a href="{% url 'services' %}?category=graphic_enhance" class="dropdown-item yellow-color">Graphical Enhancement</a>
+                    <a href="{% url 'services' %}?category=service,logo" class="dropdown-item yellow-color">Brand Design</a>
+                    <a href="{% url 'services' %}?category=vector,logo,graphic_enhance,branding,advice,service" class="dropdown-item yellow-color">All Services</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -35,17 +35,6 @@
                     <a href="" class="dropdown-item yellow-color">Graphical Enhancements</a>
                     <a href="" class="dropdown-item yellow-color">Branding</a>
                     <a href="" class="dropdown-item yellow-color">All Categories</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="logo-font font-weight-bold mr-5 yellow-color nav-link" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Special Offers
-                </a>
-                <div class="dropdown-menu black-background border-0" aria-labelledby="specials-link">
-                    <a href="" class="dropdown-item yellow-color">New Arrivals</a>
-                    <a href="" class="dropdown-item yellow-color">Deals</a>
-                    <a href="" class="dropdown-item yellow-color">Clearance</a>
-                    <a href="" class="dropdown-item yellow-color">All Specials</a>
                 </div>
             </li>
         </ul>
@@ -83,7 +72,7 @@
                 <a class="{% if grand_total %}text-info {% else %}yellow-color{% endif %} nav-link" href="">
                     <div class="text-center toggle-center">
                     <div><i class="fas fa-shopping-bag fa-lg d-none d-lg-inline-block"></i></div>
-                        <p class="my-0 font-weight-bold">
+                        <p class="my-0 font-weight-bold"> Cart:
                             {% if grand_total %}
                                 ${{ grand_total|floatformat:2 }}
                             {% else %}
@@ -96,22 +85,22 @@
         </ul>
     </div>
 </nav>
- <!-- Remove Text center from view lower than large -->
+ <!-- Remove Text center from view lower than medium -->
 <script>
     // toggles classes when screen changes. only needed for developer and assessors.
     $(window).resize(function(){
-        if($(window).width() <= 991){
+        if($(window).width() <= 1023){
             $('.toggle-center').removeClass('text-center');
             }
-        if($(window).width() > 991){
+        if($(window).width() >= 1023){
             $('.toggle-center').addClass('text-center');
             }
     });
     // Toggles classes when site is loaded.
-        if($(window).width() <= 991){
+        if($(window).width() <= 1023){
             $('.toggle-center').removeClass('text-center');
             }
-        if($(window).width() > 991){
+        if($(window).width() >= 1023){
             $('.toggle-center').addClass('text-center');
             }
 </script>
