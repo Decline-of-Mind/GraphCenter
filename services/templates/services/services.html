@@ -15,31 +15,35 @@
                 <div class="col-sm-6 mt-2 col-md-6 col-lg-4 col-xl-4 mb-1">
                     <div class="card card-image-container border-0">
                         {% if service.image %}
-                        <a class="card-image-container" href="">
-                            <img class="card-img-top img-fluid" src="{{ service.image.url }}" alt="{{ product.name }}">
+                        <a class="card-image-container" href="{% url 'service_detail' service.id %}">
+                            <img class="card-img-top img-fluid" src="{{ service.image.url }}" alt="{{ service.name }}">
                         </a>
                         {% else %}
-                        <a class="card-image-container" href="">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        <a class="card-image-container" href="{% url 'service_detail' service.id %}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ service.name }}">
                         </a>
                         {% endif %}
                         <div class="card-body black-background yellow-color">
                             <h3 class="">{{ service.name }}</h3>
                         </div>
                         <div class="card-footer black-background yellow-color text-left">
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col">
                                     <p class="text-left font-weight-bold"> {{ service.description }}</p>
                                     <hr class="hr-white">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col">
                                     <p class="font-weight-bold pt-1 text-white">€ {{ service.price }}</p>
                                 </div>
+                                <form class="form" action="" method="POST">
+                                {% csrf_token %}
                                 <div class="col">
-                                    <a href="" class="purchase-button btn red-background rounded-4 float-right text-white"><strong>Purchase</strong></a>
+                                    <a href="{% url 'service_detail' service.id %}" class="purchase-button btn red-background rounded-4 float-right text-white"><strong>Full Service</strong></a>
                                 </div>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                </form>
                             </div>
                         </div>
                     </div>

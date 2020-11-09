@@ -7,7 +7,6 @@ def cart_contents(request):
     total = 0
     service_count = 0
 
-
     grand_total = total
 
     context = {
