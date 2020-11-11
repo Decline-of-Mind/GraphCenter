@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
 body {
-    width: 100vw;
+    width: 100%;
     overflow-x: hidden;
 }
-/* 
+
 html {
     
     display: -ms-grid;
@@ -19,7 +19,8 @@ html {
     background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
     background: -o-linear-gradient(top, white, black);
     background: linear-gradient(to bottom, white, black);
-} */
+    overflow-x: hidden;
+}
 
 .logo-font{
     font-family: 'Russo', sans-serif !important;
@@ -126,6 +127,13 @@ html {
 .card-image-container {
     object-fit: fill;
     overflow: hidden;
+}
+
+
+/* Service_detail.html */
+
+.category-row {
+    width: 100%
 }
 
 /* additional tools */
