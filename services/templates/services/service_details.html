@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="container-fluid purple-background service-container">
+<div class="container-fluid purple-background service-detail-container">
     <div class="row mt-1">
         <div class="col-12 text-center mt-2">
             <h2 class="yellow-color">{{ service.name }}</h2>
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row mt-2">
-        <div class="col-12 h-75 mb-2 col-md-4">
+        <div class="col-12 h-75 mb-2 col-xl-4">
             {% if service.image %}
             <a class="card-image-container" href="">
                 <img class="card-img-top img-fluid" src="{{ service.image.url }}" alt="{{ service.name }}">
@@ -22,28 +22,28 @@
             </a>
             {% endif %}
         </div>
-            <div class="col-12 col-md-8 text-center">
+            <div class="col-12 col-xl-8 my-2 text-center">
                 <p class="yellow-color font-weight-bold"> {{ service.description }}</p>
             </div>
     </div>
-    <div class="row pb-1 pt-2 black-background">
-        <div class="d-none d-md-block col-md-2">
+    <div class="row pb-5 pt-2 black-background">
+        <div class="d-none mt-3 d-xl-block col-xl-2">
             <a href="" class="purchase-button btn red-background rounded-4 text-white"><strong>Back to Services</strong></a>
         </div>
-        <div class="d-none d-md-block col-md-2">
+        <div class="col-12 col-xl-2">
             {% if service.category %}
-            <p class="mt-1 pt-1 ml-1">
+            <p class="mt-3 pt-1 ml-1">
                 <a class="yellow-color rounded" href="{% url 'services' %}?category={{ service.category.name }}">
                     <i class="fas fa-tag fa-lg mr-2"></i><strong>{{ service.category.friendly_name }}</strong>
                 </a>
             </p>
             {% endif %}
         </div>
-        <div class="col-6">
-            <h2 class="text-white float-right">€ {{ service.price }}</h2>
+        <div class="col-6 mt-3">
+            <h2 class="text-white">€ {{ service.price }}</h2>
         </div>
-        <div class="col-6 text-center col-md-2">
-            <a href="" class="purchase-button btn yellow-background rounded-4 purple-color"><strong>Add to Cart</strong></a>
+        <div class="col-6 mt-3 col-xl-2">
+            <a href="" class="purchase-button btn yellow-background float-right rounded-4 purple-color"><strong>Add to Cart</strong></a>
         </div>
     </div>
 </div>

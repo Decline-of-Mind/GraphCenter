@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
-body {
-    width: 100%;
-    /* overflow-x: hidden; */
-}
-
 html {
-    
-    /* display: -ms-grid;
-    display: grid; */
+
     -webkit-transition: all .5s;
     -o-transition: all .5s;
     transition: all .5s;
@@ -19,7 +12,6 @@ html {
     background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
     background: -o-linear-gradient(top, white, black);
     background: linear-gradient(to bottom, white, black);
-    /* overflow-x: hidden; */
 }
 
 .logo-font{
@@ -126,6 +118,10 @@ html {
 
 /* Service_detail.html */
 
+.service-detail-container {
+    margin-top: 80px;
+}
+
 .category-row {
     width: 100%
 }
@@ -139,13 +135,17 @@ html {
 }
 
 
-
-@media (min-width: 576px) {
-    .service-container {
+/* Using media querries to make sure Service.Name is visible on service_details.html */
+@media (min-width: 320px) {
+    .service-detail-container {
+        margin-top: 120px;
+    }
+}
+@media (min-width: 359px) {
+    .service-detail-container {
         margin-top: 80px;
     }
 }
-
 
 @media (max-width: 991px) {
     .about-us-row {
