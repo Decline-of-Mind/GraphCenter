@@ -26,11 +26,11 @@
                 <p class="yellow-color font-weight-bold"> {{ service.description }}</p>
             </div>
     </div>
-    <div class="row mt-2 pb-1 pt-2 black-background">
+    <div class="row pb-1 pt-2 black-background">
         <div class="d-none d-md-block col-md-2">
             <a href="" class="purchase-button btn red-background rounded-4 text-white"><strong>Back to Services</strong></a>
         </div>
-        <div class="col-12 col-md-2">
+        <div class="d-none d-md-block col-md-2">
             {% if service.category %}
             <p class="mt-1 pt-1 ml-1">
                 <a class="yellow-color rounded" href="{% url 'services' %}?category={{ service.category.name }}">
@@ -39,8 +39,8 @@
             </p>
             {% endif %}
         </div>
-        <div class="col-6 col-md-6">
-            <h2 class="text-white float-right">{{ service.price }}</h2>
+        <div class="col-6">
+            <h2 class="text-white float-right">€ {{ service.price }}</h2>
         </div>
         <div class="col-6 text-center col-md-2">
             <a href="" class="purchase-button btn yellow-background rounded-4 purple-color"><strong>Add to Cart</strong></a>
