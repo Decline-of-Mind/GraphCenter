@@ -98,7 +98,6 @@ html {
 }
 .about-us-row {
     height: 500px; 
-    /* width: 100vw; */
     background-color: #00203FFF;
 }
 
@@ -150,7 +149,6 @@ html {
 
 @media (max-width: 991px) {
     .about-us-row {
-        /* width: 100vw; */
         height: 1200px;
     }
 
