@@ -7,34 +7,32 @@
 {% block content %}
 
 <div class="container-fluid home-container">
-  <div class="row home-row h-100 mx-2">
-        <div class="col-12 col-md-12 my-auto">
+  <div class="row home-row mt-5 ml-1 pt-5 h-100">
+        <div class="mt-5 pt-5 col-12 col-md-10">
             <h1 class="display-4 yellow-color">
                 Materialize your vision!
             </h1>
-        <hr class="hr-white">
+            <hr class="hr-white">
             <div class="my-4 uppercase text-black">
                 <h4 class="yellow-color">
                     Our designers here at GraphCenter are some of the finest in the industry. Let us guide you from the conceptual phase to a creative and well-made graphical design!
                 </h4>
             <a
             href="{% url 'services' %}"
-            class="pop-services-button btn btn-lg red-background white-color mt-5 rounded-4 py-3"
+            class="pop-services-button btn btn-lg red-background white-color mt-5 rounded-4  py-3"
             ><strong>Popular Services</strong></a>
             </div>
         </div>
     </div>
-
-
     <div class="row about-us-row black-background">
         <div class="col-12 text-center yellow-color">
             <h1 class="my-4">About us</h1>
-            <hr class="hr-white">
+            <hr class="hr-white w-75">
         </div>
         <div class="d-none d-lg-block col-lg-2">
             <img src="../static/img/about-us-small.png" alt="">
         </div>
-        <div class="col-12 col-lg-10">
+        <div class="col-12 pr-5 col-md-9">
             <p class="yellow-color">
                 <strong>
                     Here at GraphCenter, creativity, dilligence and synergy are the core of our company philosophy. 
@@ -57,9 +55,10 @@
                 </strong>
             </p>
         </div>
+        <div class="d-none d-md-block col-md-1"></div>
         <div class="col-12 text-center">
-            <hr class="hr-white">
-            <a href="" class="pop-services-button btn btn-lg red-background white-color rounded-4 py-3"><strong>Contact us</strong></a>
+            <hr class="hr-white w-75">
+            <a href="" class="pop-services-button btn btn-lg red-background white-color rounded-4 mb-4 py-3"><strong>Contact us</strong></a>
         </div>
     </div>
 </div>

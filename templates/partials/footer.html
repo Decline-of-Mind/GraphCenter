@@ -1,17 +1,19 @@
-<!-- 
-<footer>
-    <div class="container-fluid fixed-bottom">
-        <div class="row footer-row">
-            <div class="col-12 col-md-4 ml-auto">
+{% load static %} <!-- Needed to link to static files that are
+ saved in our root static folder -->
+
+<footer class="purple-background">
+    <div class="container-fluid footer-container">
+        <div class="row">
+            <div class="d-none d-md-block pt-3 col-md-4 ml-auto">
                 <a href="">
-                    <h3>Contact Us</h3>
+                    <h3 class="yellow-color">Contact Us</h3>
                 </a>
             </div>
-            <div class="col-6 col-md-4">
-                <ul class="list-inline social-links">
+            <div class="col-5 col-md-4">
+                <ul class="list-inline pt-4 text-center">
                     <li class="list-inline-item">
                     <div class="text-center">
-                        <a target="_blank" href="https://instagram.com" rel="noopener">
+                        <a target="_blank" class="yellow-color" href="https://instagram.com" rel="noopener">
                             <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
                             <span class="sr-only">Instagram</span>
                         </a>
@@ -19,7 +21,7 @@
                     </li>
                     <li class="list-inline-item">
                     <div class="text-center">
-                        <a target="_blank" href="https://www.facebook.com" rel="noopener">
+                        <a target="_blank" class="yellow-color" href="https://www.facebook.com" rel="noopener">
                             <i class="fab fa-facebook-f fa-lg" aria-hidden="true"></i>
                             <span class="sr-only">Facebook</span>
                         </a>
@@ -27,7 +29,7 @@
                     </li>
                     <li class="list-inline-item">
                     <div class="text-center">
-                        <a target="_blank" href="https://github.com/Decline-of-Mind" rel="noopener">
+                        <a target="_blank" class="yellow-color" href="https://github.com/Decline-of-Mind" rel="noopener">
                             <i class="fab fa-github fa-lg" aria-hidden="true"></i>
                             <span class="sr-only">Developer Github</span>
                         </a>
@@ -35,11 +37,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-6 col-md-4 footer-logo mr-auto">
-                <p><strong>Developer: </strong>Luc Gotink</p>
-                <p>For Educational Purposes Only</p>
+            <div class="col-7 col-md-4 pt-1 text-center yellow-color">
+                <p class="d-none d-md-block"><strong>Developer: </strong>Luc Gotink</p>
+                <p class="small pt-3">For Educational Purposes Only</p>
             </div>
-            
         </div>
     </div>
-</footer> -->
+</footer>
