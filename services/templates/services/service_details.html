@@ -26,9 +26,9 @@
                 <p class="yellow-color font-weight-bold"> {{ service.description }}</p>
             </div>
     </div>
-    <div class="row pb-5 pt-2 black-background">
+    <div class="row pb-1 black-background">
         <div class="d-none mt-3 d-xl-block col-xl-2">
-            <a href="" class="purchase-button btn red-background rounded-4 text-white"><strong>Back to Services</strong></a>
+            <a href="" class="btn red-background rounded-4 text-white"><strong>Back to Services</strong></a>
         </div>
         <div class="col-12 col-xl-2">
             {% if service.category %}
@@ -40,11 +40,19 @@
             {% endif %}
         </div>
         <div class="col-6 mt-3">
-            <h2 class="text-white">€ {{ service.price }}</h2>
+            <h2 class="text-white float-right">€ {{ service.price }}</h2>
         </div>
-        <div class="col-6 mt-3 col-xl-2">
-            <a href="" class="purchase-button btn yellow-background float-right rounded-4 purple-color"><strong>Add to Cart</strong></a>
-        </div>
+        <form id="add_to_cart" action="{% url 'add_to_cart' service.id %}" method="POST">
+        {% csrf_token %}
+            <div class="col-6 mt-3 float-left col-xl-2">
+                <button type="submit" name="add_service" class="purchase-button btn font-weight-bold yellow-background rounded-4 purple-color">ADD TO CART</button>
+            </div>
+            <input class="form-control" type="hidden" 
+                                            name="quantity" value="1" min="1" max="1" 
+                                            data-item_id="{{ service.id }}" 
+                                            id="id_qty_{{ service.id }}">
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        </form>
     </div>
 </div>
 

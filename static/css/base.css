@@ -130,6 +130,10 @@ html {
     width: 100%
 }
 
+.purchase-button {
+    width: 140px;
+}
+
 /* additional tools */
 .hr-white {
     /* so it works in every browser type */
