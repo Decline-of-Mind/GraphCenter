@@ -16,7 +16,7 @@ html {
 }
 /* primary */
 .yellow-background {
-    background-color: #E0FF4F !important;
+    background-color: #E0FF4F;
 }
 
 .yellow-color {
@@ -40,7 +40,7 @@ html {
 }
 
 .purple-color {
-    color: #00203FFF !important; 
+    color: #00203FFF; 
 }
 
 .red-background {
@@ -51,7 +51,14 @@ html {
     color: #FF6663 !important;
 }
 
+/* message container */
 
+.message-container {
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    z-index: 999999;
+}
 
 /* navigation */
 .main-nav {
@@ -63,8 +70,6 @@ html {
 .footer-container {
     height: 100px;
 }
-
-
 
 
 /* Nav and dropdown dynamic responses */
@@ -85,6 +90,34 @@ html {
     border: 1px solid #E0FF4F;
 }
 
+/* button responses, 2 kinds. */
+
+.red-btn {
+    background-color: #FF6663;
+    color: white;
+}
+
+.red-btn:hover,
+.red-btn:active,
+.red-btn:focus {
+    background-color: #00272b;
+    color: #FF6663;
+    border: 1px solid #FF6663;
+}
+
+.yellow-btn {
+    background-color: #E0FF4F;
+    color: #00203FFF;
+}
+
+.yellow-btn:hover,
+.yellow-btn:active,
+.yellow-btn:focus {
+    background-color: #00203FFF;
+    color: #E0FF4F;
+    border: 1px solid #E0FF4F;
+}
+
 /* Index.html */
 
 .home-container {
@@ -97,20 +130,11 @@ html {
     background-color: #00203FFF;
 }
 
-.pop-services-button:hover,
-.pop-services-button:active,
-.pop-services-button:focus {
-    background-color:#00203FFF;
-    color: #E0FF4F !important;
-    border: 1px solid #E0FF4F;
-}
-
-
 
 /* Services.html */
 
 .service-container {
-    min-height: 870px;
+    min-height: 83vh;
     margin-top: 80px;
 }
 
@@ -119,10 +143,16 @@ html {
     overflow: hidden;
 }
 
+.card-body,
+.card-footer {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 /* Service_detail.html */
 
 .service-detail-container {
+    min-height: 83vh;
     margin-top: 80px;
 }
 
@@ -130,11 +160,53 @@ html {
     width: 100%
 }
 
-.purchase-button {
-    width: 140px;
+
+/* Cart */
+
+.cart-background {
+    /* height: 100%; */
+    background: url("../img/wallet-no-bg.png") no-repeat top right;
+}
+
+
+.cart-container {
+    min-height: 81.5vh;
+}
+
+.table-align-right {
+  text-align: right;
+}
+
+.delete-btn {
+    color: #E0FF4F;
+    background: none;
+    padding: 0px;
+    border: none;
+
+}
+
+.delete-btn:hover,
+.delete-btn:active,
+.delete-btn:focus {
+    color: #FF6663;
+}
+
+
+/* Media queries to remove whitespace and push down content from ipads */
+@media (min-width: 1023px) {
+    .cart-container {
+        min-height: 86vh;
+    }
+}
+/* Removing the extra height from desktop view  */
+@media (min-width: 1200px) {
+    .cart-container {
+        min-height: 81.5vh;
+    }
 }
 
 /* additional tools */
+
 .hr-white {
     /* so it works in every browser type */
     border-color: white; 
@@ -142,9 +214,12 @@ html {
     color: white;
 }
 
+.yellow-border {
+    border: 2px solid #E0FF4F;
+}
 
 
-/* Using media querries to make sure Service.Name is visible on service_details.html */
+/* Using media queries to make sure Service.Name is visible on service_details.html */
 @media (min-width: 320px) {
     .service-detail-container {
         margin-top: 120px;

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -35,8 +35,19 @@ def add_to_cart(request, item_id):
         print(f'Added {service.name} to your shopping cart')
 
     request.session['cart'] = cart
-    print(request.session['cart'])
     return redirect(redirect_url)
 
 
+def delete_from_cart(request, item_id):
+
+    '''Removes service from the cart'''
     
+
+    cart = request.session.get('cart', {})
+
+    if item_id in list(cart.keys()):
+        cart.pop(item_id)
+
+    request.session['cart'] = cart
+    return redirect(reverse('view_cart'))
+

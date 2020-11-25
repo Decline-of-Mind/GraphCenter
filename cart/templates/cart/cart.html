@@ -3,37 +3,118 @@
 
 
 {% block content %}
-<div class="overlay"></div>
-<section id="cart">
-    <div class="container mt-5 pt-3">
+<section class="purple-background" id="cart">
+    <div class="container cart-background mt-5 pt-5">
 
     <!-- Cart with Services -->
     <div class="cart-container">
         {% if cart_items %}
-        <table class="no-wrap table table-striped table-responsive">
-            <thead>
-                <tr>
-                    <th>Cart</th>
-                    <th class="">Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-12 mt-5 black-background col-md-6 toggle-border yellow-border">
+                <table class="table mt-3 yellow-color table-striped">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th class="table-align-right toggle-align">Price</th>
+                            <th class="table-align-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.service.name }}</td>
+                            <td class="table-align-right toggle-align">€  {{ item.service.price }}</td>
+                            <td class ="table-align-right">
+                                <form method="POST" action="{% url 'delete_from_cart' item.item_id %}">
+                                    {% csrf_token %}
+                                    <button class="delete-btn" type="submit"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            <td><strong>Subtotal: </strong></td>
+                            <td></td>
+                            <td class="table-align-right"><strong>€ {{ total }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-none d-md-block wallet-img col-md-6"></div>
+        </div> 
+        <!-- Cost Table and Pay Button -->
+        <div class="row">
+            <div class="col-12 mt-5 black-background col-md-6 toggle-border yellow-border">
+                <table class="table mt-3 yellow-color table-striped">
+                    <thead>
+                        <tr>
+                            <th><h3>Additional Costs</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VAT tax (21%)</td>
+                            <td class="table-align-right">€ {{ vat|floatformat:2 }}</td>
+                        </tr>
+                        <tr class="font-weight-bold">
+                            <td scope="row">Grand Total:</td>
+                            <td class="table-align-right">€ {{ grand_total|floatformat:2 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6 pt-5 mt-5 toggle-button text-center">
+                <a href="{% url 'services' %}" class="btn btn-lg red-btn w-75 mt-3 rounded-4">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <strong>  BACK TO SERVICES</strong>
+                </a>
+                <button type="submit"  class="btn btn-lg yellow-btn w-75 font-weight-bold mt-4 rounded-4">
+                    <strong>CHECKOUT  </strong>
+                    <span class="icon">
+                            <i class="fas fa-chevron-right"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+        {% else %}
+                <p class="lead mt-5 yellow-color font-weight-bold">Your Cart is Empty</p>
+                <a href="{% url 'services' %}" class="btn bts-button red-btn rounded-4 btn-lg">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                <strong>Back to Services</strong></a>
     </div>
-    {% else %}
-    <p class="lead mt-5 yellow-color font-weight-bold">Your Cart is Empty</p>
-    <a href="{% url 'services' %}" class="btn red-background rounded-4 text-white btn-lg">
-        <span class="icon">
-            <i class="fas fa-chevron-left"></i>
-        </span>
-    <strong>Back to Services</strong></a>
+            
     {% endif %}
 
 
     </div>
 </section>
+<script>
+// Toggles for removing/adding table-align-right,yellow-border & padding-top in mobile/desktop view
+        // Removes classes to make mobile view more engaging
+        if($(window).width() <= 519){
+            $('.toggle-align').removeClass('table-align-right');
+            $('.toggle-border').removeClass('yellow-border');
+            $('.toggle-button').removeClass('pt-5').addClass('pb-5');
+            $('.container').removeClass('cart-background');
+            }
+        // Altough not technically necessary for the user, making sure everything has the classes it needs on desktop when resizing for assesors
+        $(window).resize(function(){
+            if($(window).width() >= 520){
+                $('.toggle-align').addClass('table-align-right');
+                $('.toggle-border').addClass('yellow-border');
+                $('.toggle-button').addClass('pt-5').removeClass('pb-5');
+                $('.container').addClass('cart-background');
+                }
+            if($(window).width() <= 519){
+            $('.toggle-align').removeClass('table-align-right');
+            $('.toggle-border').removeClass('yellow-border');
+            $('.toggle-button').removeClass('pt-5').addClass('pb-5');
+            $('.container').removeClass('cart-background');
+            }
+        });
+</script>
 {% endblock %}

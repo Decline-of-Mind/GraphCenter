@@ -3,56 +3,49 @@
 
 {% block content %}
 
-<div class="container-fluid purple-background service-detail-container">
-    <div class="row mt-1">
-        <div class="col-12 text-center mt-2">
-            <h2 class="yellow-color">{{ service.name }}</h2>
-            <hr class="hr-white w-50">
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-12 h-75 mb-2 col-xl-4">
+<div class="container-fluid purple-background yellow-color flex-fill service-detail-container">
+    <div class="row mt-5 mx-3">
+        <div class="col-md-5 col-lg-5 col-sm">
+         <a href="{% url 'services' %}" class="btn red-btn mt-2 rounded-4 text-white"><strong>
+         <span class="icon"><i class="fas fa-chevron-left"></i></span> Back to Services</strong></a>
+            <div class="image-container mt-2">
             {% if service.image %}
-            <a class="card-image-container" href="">
-                <img class="card-img-top img-fluid" src="{{ service.image.url }}" alt="{{ service.name }}">
-            </a>
+                <img class="card-img-top img-fluid rounded-0" src="{{ service.image.url }}" alt="{{ service.name }}">
             {% else %}
-            <a class="card-image-container" href="">
-                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ service.name }}">
-            </a>
+                <img class="card-img-top img-fluid rounded-0" src="{{ MEDIA_URL }}noimage.png" alt="{{ service.name }}">
             {% endif %}
-        </div>
-            <div class="col-12 col-xl-8 my-2 text-center">
-                <p class="yellow-color font-weight-bold"> {{ service.description }}</p>
             </div>
-    </div>
-    <div class="row pb-1 black-background">
-        <div class="d-none mt-3 d-xl-block col-xl-2">
-            <a href="" class="btn red-background rounded-4 text-white"><strong>Back to Services</strong></a>
         </div>
-        <div class="col-12 col-xl-2">
-            {% if service.category %}
-            <p class="mt-3 pt-1 ml-1">
-                <a class="yellow-color rounded" href="{% url 'services' %}?category={{ service.category.name }}">
-                    <i class="fas fa-tag fa-lg mr-2"></i><strong>{{ service.category.friendly_name }}</strong>
-                </a>
-            </p>
-            {% endif %}
-        </div>
-        <div class="col-6 mt-3">
-            <h2 class="text-white float-right">€ {{ service.price }}</h2>
-        </div>
-        <form id="add_to_cart" action="{% url 'add_to_cart' service.id %}" method="POST">
-        {% csrf_token %}
-            <div class="col-6 mt-3 float-left col-xl-2">
-                <button type="submit" name="add_service" class="purchase-button btn font-weight-bold yellow-background rounded-4 purple-color">ADD TO CART</button>
+
+        <div class="col-md-7 col-lg-7 col-sm">
+            <div class="service-details-container mb-5 mt-md-5">
+                <h1 class="mt-1">{{ service.name }}</h1>
+                <div class="d-inline lead font-weight-bold">€ {{ service.price }}</div>
+                <hr class="hr-white">
+                <h1>Description:</h1>
+                <hr class="hr-white">
+                <h2 class=""> {{ service.description }}</h2>
+                <hr class="hr-white">
+                <p class="mt-3 pt-3 ml-1">
+                    <a class="yellow-color rounded" href="{% url 'services' %}?category={{ service.category.name }}">
+                        <i class="fas fa-tag fa-lg mr-2"></i><strong>{{ service.category.friendly_name }}</strong>
+                    </a>
+                </p>
             </div>
-            <input class="form-control" type="hidden" 
-                                            name="quantity" value="1" min="1" max="1" 
-                                            data-item_id="{{ service.id }}" 
-                                            id="id_qty_{{ service.id }}">
-            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-        </form>
+
+            <div class="order-container">
+                <form id="add_to_cart" action="{% url 'add_to_cart' service.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="add_service" class="float-right yellow-btn btn font-weight-bold rounded-4 mb-3 mt-lg-3">ADD TO CART</button>
+                <input class="form-control" type="hidden" 
+                                                name="quantity" value="1" min="1" max="1" 
+                                                data-item_id="{{ service.id }}" 
+                                                id="id_qty_{{ service.id }}">
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

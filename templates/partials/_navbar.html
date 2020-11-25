@@ -71,10 +71,10 @@
                 </a>
             </li>
             <li class="nav-item inline-item">
-                <a class="{% if grand_total %}text-info {% else %}yellow-color{% endif %} nav-link" href="{% url 'view_cart' %}">
+                <a class="{% if grand_total %}text-warning {% else %}yellow-color{% endif %} nav-link" href="{% url 'view_cart' %}">
                     <div class="text-center toggle-center">
                     <div><i class="fas fa-shopping-bag fa-lg d-none d-lg-inline-block"></i></div>
-                        <p class="my-0 font-weight-bold"> Cart:
+                        <p class="my-0 font-weight-bold"> <span class="d-lg-none"> Cart:</span>
                             {% if grand_total %}
                                 ${{ grand_total|floatformat:2 }}
                             {% else %}
