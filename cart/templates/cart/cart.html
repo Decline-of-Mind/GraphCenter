@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="purple-background" id="cart">
-    <div class="container cart-background mt-5 pt-5">
+    <div class="container cart-background mt-5 pb-5 pt-5">
 
     <!-- Cart with Services -->
     <div class="cart-container">
@@ -79,17 +79,18 @@
             </div>
         </div>
         {% else %}
+        <div class="row empty-cart mt-5">
+            <div class="col-6 mt-5">
                 <p class="lead mt-5 yellow-color font-weight-bold">Your Cart is Empty</p>
                 <a href="{% url 'services' %}" class="btn bts-button red-btn rounded-4 btn-lg">
                     <span class="icon">
                         <i class="fas fa-chevron-left"></i>
                     </span>
                 <strong>Back to Services</strong></a>
-    </div>
-            
+            </div>
+        </div>
     {% endif %}
-
-
+        </div>
     </div>
 </section>
 <script>

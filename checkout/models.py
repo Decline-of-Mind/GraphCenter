@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-
 import uuid
 
 from django.db import models
@@ -26,16 +23,7 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 
-    billing_address = models.ForeignKey(
-        'BillingAddress',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True)
 
-    artwork = models.FileField(
-        upload_to='artwork/%Y/%m/%d', blank=True, null=True)
-    
-    description = models.TextField(max_length=250, blank=True, null=True)
 
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     vat_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
@@ -70,7 +58,11 @@ class Order(models.Model):
 
 
 class BillingAddress(models.Model):
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, null=False, blank=False,
+                              on_delete=models.CASCADE, related_name='billingaddress')
+
     company_name = models.CharField(max_length=50, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     country = CountryField(multiple=False, blank_label='(select country)', null=False, blank=False)
@@ -80,13 +72,18 @@ class BillingAddress(models.Model):
     second_address = models.CharField(max_length=80, null=True, blank=True)
     region = models.CharField(max_length=80, null=True, blank=True)
 
+    def __str__(self):
+        return self.user.username
+
 
 class OrderLineItem(models.Model):
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
+    order = models.ForeignKey(Order,  null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     service = models.ForeignKey(Service, null=False, blank=False, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1, null=False, blank=False)
+    artwork = models.FileField(
+        upload_to='customer_images/%Y/%m/%d', blank=True, null=True)
+    description = models.TextField(max_length=250, blank=True, null=True)
     lineitem_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
-
 
     def save(self, *args, **kwargs):
         """
