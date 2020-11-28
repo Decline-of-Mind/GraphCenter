@@ -1,18 +1,19 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 
+from .models import Order, OrderLineItem
+from .forms import OrderForm
+
 def checkout(request):
-    cart = request.session.get('bag', {})
+    cart = request.session.get('cart', {})
     if not cart:
         messages.error(request, "Cart is empty")
         return redirect(reverse('services'))
-
-    billingform = BillingForm()
-    orderlineform = OrderLineForm()
+    orderform = OrderForm()
+    # orderlineform = OrderLineForm()
     template = 'checkout/checkout.html'
     context = {
-        'billing_form': billingform,
-        'orderlineform': orderlineform,
+        'order_form': orderform,
     }
 
     return render(request, template, context)

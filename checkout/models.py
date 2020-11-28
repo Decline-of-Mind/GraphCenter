@@ -6,9 +6,8 @@ from django.db import models
 
 from django_countries.fields import CountryField
 from django.db.models import Sum
-from django.conf import settings
-
 from services.models import Service
+
 
 class Order(models.Model):
 
@@ -20,10 +19,18 @@ class Order(models.Model):
         ('finished', 'Finished')
     )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-
-
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    #                          on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=40, null=False, blank=False)
+    email = models.EmailField(max_length=100, null=False, blank=False)
+    company_name = models.CharField(max_length=50, null=True, blank=True)
+    phone_number = models.CharField(max_length=20, default='', null=False, blank=False)
+    country = CountryField(multiple=False, blank_label='(select country)', null=False, blank=False)
+    city = models.CharField(max_length=40, null=False, blank=False)
+    zipcode = models.CharField(max_length=20, null=False, blank=False)
+    street_address = models.CharField(max_length=80, null=False, blank=False)
+    second_address = models.CharField(max_length=80, null=True, blank=True)
+    region = models.CharField(max_length=80, null=True, blank=True)
 
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     vat_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
@@ -57,25 +64,6 @@ class Order(models.Model):
         return self.order_number
 
 
-class BillingAddress(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, null=False, blank=False,
-                              on_delete=models.CASCADE, related_name='billingaddress')
-
-    company_name = models.CharField(max_length=50, null=True, blank=True)
-    phone_number = models.CharField(max_length=20, null=False, blank=False)
-    country = CountryField(multiple=False, blank_label='(select country)', null=False, blank=False)
-    city = models.CharField(max_length=40, null=False, blank=False)
-    zipcode = models.CharField(max_length=20, null=False, blank=False)
-    street_address = models.CharField(max_length=80, null=False, blank=False)
-    second_address = models.CharField(max_length=80, null=True, blank=True)
-    region = models.CharField(max_length=80, null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username
-
-
 class OrderLineItem(models.Model):
     order = models.ForeignKey(Order,  null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     service = models.ForeignKey(Service, null=False, blank=False, on_delete=models.CASCADE)
@@ -95,4 +83,6 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return f'Service: {self.service.name} on order {self.order.order_number}'
+
+
 

@@ -1,28 +1,31 @@
 from django import forms
-from .models import Order, BillingAddress, OrderLineItem
+from .models import Order, OrderLineItem
 
 
-class BillingForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
     class Meta:
-        model = BillingAddress
-        fields = ('company_name', 'phone_number', 'country', 'region',
-                  'city', 'street_address', 'zipcode', 'second_address')
+        model = Order
+        fields = ('full_name', 'company_name', 'email', 'phone_number', 'country',
+                  'region', 'city', 'street_address', 'zipcode',
+                  'second_address')
 
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on the first field
         """
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         placeholders = {
+                'full_name': 'Full Name',
+                'email': 'Email Address',
                 'company_name': 'Company Name',
                 'phone_number': 'Phone Number',
                 'country': 'Country',
-                'region': 'Province',
+                'region': 'County, State or Province',
                 'city': 'City',
                 'street_address': 'Street Address',
-                'zip_code': 'Postal Code',
-                'second_street': '2nd Street Address',
+                'zipcode': 'Postal Code',
+                'second_address': '2nd Street Address',
             }
 
         self.fields['phone_number'].widget.attrs['autofocus'] = True
