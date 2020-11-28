@@ -44,15 +44,15 @@ class OrderLineForm(forms.ModelForm):
         model = OrderLineItem
         fields = ('artwork', 'description',)
 
-        def __init__(self, *args, **kwargs):
-            """
-            Add placeholders and classes, remove auto-generated
-            labels and set autofocus on the first field
-            """
-            super().__init__(*args, **kwargs)
-            placeholders = {
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on the first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
                 'artwork': 'Artwork',
                 'description': 'Description'
             }
-
+        self.fields['artwork'].widget.attrs['autofocus'] = True
 
