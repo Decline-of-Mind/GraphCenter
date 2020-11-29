@@ -20,19 +20,13 @@
             </div>
         </div>
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">               
-                {% csrf_token %}
+            {% csrf_token %}
         <div class="row">
             <div class="col-12 col-lg-6 yellow-color order-lg-last mb-5">
                 <p>Order Summary ({{ service_count }})</p>
                 <div class="row yellow-color">
-                    <div class="col-3">
+                    <div class="col-7 offset-2">
                         <p class="mb-1 mt-0 small">Item</p>
-                    </div>
-                    <div class="col-4 text-right">
-                        <p class="mb-1 mt-0 small">Description</p>
-                    </div>
-                    <div class="col-2 text-right">
-                        <p class="mb-1 mt-0 small">Upload Artwork</p>
                     </div>
                     <div class="col-3 text-right">
                         <p class="mb-1 mt-0 small">Subtotal</p>
@@ -49,33 +43,16 @@
                                 {% endif %}
                             </a>
                         </div>
-                        <div class="col-3 col-md-4">
+                        <div class="col-7">
                             <p class="my-0"><strong>{{ item.service.name }}</strong></p>
                             <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
                         </div>
-                        <div class="col-3 col-md-2">
-                            <a id="descripbutton" role="button" data-toggle="collapse" 
-                            data-target="#descriptionfield-{{ forloop.counter }}" aria-expanded="false" aria-controls="descriptionfield" class="btn red-btn">
-                                <i class="fa fa-pen fa-xs"></i>
-                            </a>
-                            <div class="collapse mt-1" id="descriptionfield-{{ forloop.counter }}">
-                                {{ orderline_form.description }}
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <a id="#uploadbutton" role="button" data-toggle="collapse" 
-                            data-target="#uploadField-{{ forloop.counter }}" aria-expanded="false" aria-controls="uploadfield" class="btn red-btn">
-                                <i class="fa fa-upload fa-xs"></i>
-                            </a>
-                            <div class="collapse mt-1" id="uploadField-{{ forloop.counter }}">
-                                {{ orderline_form.artwork }}
-                            </div>
-                        </div>
-                        <div class="col-2 text-right">
-                            <p class="my-0 small">${{ item.service.price | calc_subtotal:item.quantity }}</p>
+                        <div class="col-3 text-right">
+                            <p class="my-0 small">€{{ item.service.price | calc_subtotal:item.quantity }}</p>
                         </div>
                     </div>
                 {% endfor %}
+
                 <hr class="hr-white my-0">
                 <div class="row text-right">
                     <div class="col-7 offset-2">
@@ -84,9 +61,17 @@
                         <p class="my-0">Grand Total:</p>
                     </div>
                     <div class="col-3">
-                        <p class="my-0">${{ total | floatformat:2 }}</p>
-                        <p class="my-0">${{ vat_amount | floatformat:2 }}</p>
-                        <p class="my-0"><strong>${{ grand_total | floatformat:2 }}</strong></p>
+                        <p class="my-0">€{{ total | floatformat:2 }}</p>
+                        <p class="my-0">€{{ vat | floatformat:2 }}</p>
+                        <p class="my-0"><strong>€{{ grand_total | floatformat:2 }}</strong></p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6">
+                        {{ order_form.description | as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ order_form.artwork | as_crispy_field }}
                     </div>
                 </div>
             </div>
@@ -130,37 +115,37 @@
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
 
-                    <div class="submit-button text-right mt-5 mb-2">                    
-						<a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0">
+                    <div class="submit-button text-right mt-2 mb-5">
+                    	<p class="small yellow-color mb-1 my-0">
+							<span class="icon">
+								<i class="fas fa-exclamation-circle"></i>
+							</span>
+							<span>Your card will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
+						</p>                    
+						<a href="{% url 'view_cart' %}" class="btn red-btn mb-5 rounded-0">
 							<span class="icon">
 								<i class="fas fa-chevron-left"></i>
 							</span>
 							<span class="font-weight-bold">Adjust Cart</span>
 						</a>
-						<button id="submit-button" class="btn btn-black rounded-0">
+						<button id="submit-button" class="btn yellow-btn mb-5 rounded-0">
 							<span class="font-weight-bold">Complete Order</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>
 							</span>
 						</button>
-						<p class="small text-danger my-0">
-							<span class="icon">
-								<i class="fas fa-exclamation-circle"></i>
-							</span>
-							<span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
-						</p>
 					</div>
                 </div>
             </div>
         </form>
     </div>
-    <!-- <div id="loading-overlay">
+    <div id="loading-overlay">
         <h1 class="text-light logo-font loading-spinner">
             <span class="icon">
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             </span>
         </h1>
-    </div> -->
+    </div>
 
 {% endblock %}
 

@@ -74,11 +74,11 @@ form.addEventListener('submit', function(ev) {
                     phone: $.trim(form.phone_number.value),
                     email: $.trim(form.email.value),
                     address:{
-                        line1: $.trim(form.street_address1.value),
-                        line2: $.trim(form.street_address2.value),
-                        city: $.trim(form.town_or_city.value),
+                        line1: $.trim(form.street_address.value),
+                        line2: $.trim(form.second_address.value),
+                        city: $.trim(form.city.value),
                         country: $.trim(form.country.value),
-                        state: $.trim(form.county.value),
+                        state: $.trim(form.region.value),
                     }
                 }
             },
@@ -86,12 +86,12 @@ form.addEventListener('submit', function(ev) {
                 name: $.trim(form.full_name.value),
                 phone: $.trim(form.phone_number.value),
                 address: {
-                    line1: $.trim(form.street_address1.value),
-                    line2: $.trim(form.street_address2.value),
-                    city: $.trim(form.town_or_city.value),
+                    line1: $.trim(form.street_address.value),
+                    line2: $.trim(form.second_address.value),
+                    city: $.trim(form.city.value),
                     country: $.trim(form.country.value),
-                    postal_code: $.trim(form.postcode.value),
-                    state: $.trim(form.county.value),
+                    postal_code: $.trim(form.zipcode.value),
+                    state: $.trim(form.region.value),
                 }
             },
         }).then(function(result) {

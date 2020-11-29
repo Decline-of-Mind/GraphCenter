@@ -1,13 +1,13 @@
 from django import forms
-from .models import Order, OrderLineItem
+from .models import Order
 
 
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('full_name', 'company_name', 'email', 'phone_number', 'country',
-                  'region', 'city', 'street_address', 'zipcode',
-                  'second_address')
+        fields = ('full_name', 'company_name', 'email', 'phone_number',
+                  'country', 'region', 'city', 'street_address', 'zipcode',
+                  'second_address', 'artwork', 'description', 'status')
 
     def __init__(self, *args, **kwargs):
         """
@@ -26,6 +26,9 @@ class OrderForm(forms.ModelForm):
                 'street_address': 'Street Address',
                 'zipcode': 'Postal Code',
                 'second_address': '2nd Street Address',
+                'artwork': 'Your Artwork',
+                'description': 'Max 250 characters',
+                'status': 'status',
             }
 
         self.fields['phone_number'].widget.attrs['autofocus'] = True
@@ -38,21 +41,4 @@ class OrderForm(forms.ModelForm):
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
 
-
-class OrderLineForm(forms.ModelForm):
-    class Meta:
-        model = OrderLineItem
-        fields = ('artwork', 'description',)
-
-    def __init__(self, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on the first field
-        """
-        super().__init__(*args, **kwargs)
-        placeholders = {
-                'artwork': 'Artwork',
-                'description': 'Description'
-            }
-        self.fields['artwork'].widget.attrs['autofocus'] = True
 

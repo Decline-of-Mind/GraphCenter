@@ -1,12 +1,17 @@
 from django.db import models
-
+from django.conf import settings
 import uuid
 
-from django.db import models
+import os
 
 from django_countries.fields import CountryField
 from django.db.models import Sum
 from services.models import Service
+
+# Makes a dynamic path for the images provided by the user
+
+def user_directory_path(instance, filename):
+    return 'customer_images/user_{0}/{1}'.format(instance.user.id, filename)
 
 
 class Order(models.Model):
@@ -32,23 +37,33 @@ class Order(models.Model):
     second_address = models.CharField(max_length=80, null=True, blank=True)
     region = models.CharField(max_length=80, null=True, blank=True)
 
+    artwork = models.FileField(
+        upload_to=user_directory_path, blank=True, null=True)
+    description = models.TextField(max_length=250, blank=True, null=True)
+
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
-    vat_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    vat = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+
+    original_cart = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
+    status = models.CharField(
+        choices=STATUS, default='requested', max_length=10)
 
     def _generate_order_number(self):
         '''
         Generates a random, unique order number with UUID
         '''
-        return uuid4.uuid4().hex.upper()
+        return uuid.uuid4().hex.upper()
 
     def update_total(self):
         """
         Update grand total when line item is added,
         including vat taxes
         """
-        self.order_total = self.lineitems.aggregrate(Sum('lineitem_total'))['lineitem_total__sum']
-        self.grand_total = self.order_total + vat_amount
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.vat = self.order_total * settings.VATPERCENTAGE/100
+        self.grand_total = self.order_total + self.vat
         self.save()
 
     def save(self, *args, **kwargs):
@@ -68,9 +83,6 @@ class OrderLineItem(models.Model):
     order = models.ForeignKey(Order,  null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     service = models.ForeignKey(Service, null=False, blank=False, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1, null=False, blank=False)
-    artwork = models.FileField(
-        upload_to='customer_images/%Y/%m/%d', blank=True, null=True)
-    description = models.TextField(max_length=250, blank=True, null=True)
     lineitem_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
 
     def save(self, *args, **kwargs):
