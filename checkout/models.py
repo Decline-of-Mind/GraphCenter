@@ -2,11 +2,10 @@ from django.db import models
 from django.conf import settings
 import uuid
 
-import os
-
 from django_countries.fields import CountryField
 from django.db.models import Sum
 from services.models import Service
+from profiles.models import UserProfile
 
 # Makes a dynamic path for the images provided by the user
 
@@ -24,8 +23,9 @@ class Order(models.Model):
         ('finished', 'Finished')
     )
 
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL,
-    #                          on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, 
+                                    null=True, blank=True, related_name='orders')
+
     full_name = models.CharField(max_length=40, null=False, blank=False)
     email = models.EmailField(max_length=100, null=False, blank=False)
     company_name = models.CharField(max_length=50, null=True, blank=True)
