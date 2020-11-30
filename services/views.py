@@ -43,11 +43,12 @@ def add_service(request):
     if request.method == "POST":
         form = ServiceForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            service = form.save()
             messages.success(request, 'Successfully Added Service!')
-            return redirect(reverse('add_service'))
+            return redirect(reverse('service_detail', args=[service.id]))
         else:
-            messages.error(request, 'Failed to add Service. Please ensure the form is valid.')
+            messages.error(request, 'Failed to add Service.'
+                                    'Please ensure the form is valid.')
 
     else:
         form = ServiceForm()
@@ -59,6 +60,7 @@ def add_service(request):
 
     return render(request, template, context)
 
+
 def edit_service(request, service_id):
     """Edit a Service in the store"""
 
@@ -68,10 +70,11 @@ def edit_service(request, service_id):
         form = ServiceForm(request.POST, request.FILES, instance=service)
         if form.is_valid():
             form.save()
-            message.success(request, 'Successfully Updated the Service')
+            messages.success(request, 'Successfully Updated the Service')
             return redirect(reverse('service_detail', args=[service_id]))
         else:
-            messages.error(request, 'Failed to Update the Service. Please ensure the form is valid.')
+            messages.error(request, 'Failed to Update the Service.'
+                                    'Please ensure the form is valid.')
 
     form = ServiceForm(instance=service)
     messages.info(request, f' You are editing { service.name }')
@@ -83,3 +86,12 @@ def edit_service(request, service_id):
     }
 
     return render(request, template, context)
+
+def delete_service(request, service_id):
+    """ Delete a Service from the store """
+    service = get_object_or_404(Service, pk=service_id)
+    service.delete()
+    messages.success(request, 'Succesfully deleted'
+                              'the Service from the store')
+
+    return redirect(reverse('services'))
