@@ -224,6 +224,15 @@ footer {
     }
 }
 
+/* Allauth form Formatting */
+ 
+.allauth-form-inner-content p {
+    margin-top: 1.5rem;
+    color:white !important;
+}
+
+
+
 /* Bootstrap classes */
 
 /* Convenience classes - colors copied from Bootstrap */

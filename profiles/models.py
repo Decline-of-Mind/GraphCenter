@@ -27,7 +27,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 @receiver(post_save, sender=User)
-def create_or_update_user_profile(sendder, instance, created, **kwargs):
+def create_or_update_user_profile(sender, instance, created, **kwargs):
     """ 
     Create or adjust the user profile
     """
