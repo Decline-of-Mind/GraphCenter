@@ -9,6 +9,7 @@ from profiles.models import UserProfile
 
 # Makes a dynamic path for the images provided by the user
 
+
 def user_directory_path(instance, filename):
     return 'customer_images/user_{0}/{1}'.format(instance.user.id, filename)
 

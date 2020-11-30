@@ -29,8 +29,8 @@ class StripeWH_Handler:
         send_mail(
             subject,
             body,
-            settings.DEFAULT_FROM_EMAIL
-            [cust_email]
+            settings.DEFAULT_FROM_EMAIL,
+            [cust_email],
         )
 
 
@@ -68,8 +68,6 @@ class StripeWH_Handler:
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
             if save_info:
-                profile.default_company_name = shipping_details.address.company_name,
-                profile.default_phone_number = shipping_details.address.phone,
                 profile.default_country = shipping_details.address.country,
                 profile.default_zipcode = shipping_details.address.postal_code,
                 profile.default_city = shipping_details.address.city,
@@ -83,10 +81,9 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 order = Order.objects.get(
-                    full_name__iexact=shipping_details.address.name,
-                    email__iexact=billing_details.address.email,
-                    company_name__iexact=shipping_details.address.company_name,
-                    phone_number__iexact=shipping_details.address.phone,
+                    full_name__iexact=shipping_details.name,
+                    email__iexact=billing_details.email,
+                    phone_number__iexact=shipping_details.phone,
                     country__iexact=shipping_details.address.country,
                     zipcode__iexact=shipping_details.address.postal_code,
                     city__iexact=shipping_details.address.city,
@@ -115,7 +112,6 @@ class StripeWH_Handler:
                     full_name=shipping_details.name,
                     user_profile=profile,
                     email=billing_details.email,
-                    company_name=billing_details.company_name,
                     phone_number=shipping_details.phone,
                     country=shipping_details.address.country,
                     zipcode=shipping_details.address.postal_code,

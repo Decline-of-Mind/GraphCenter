@@ -19,7 +19,7 @@
                 <hr class="hr-white w-100">
             </div>
         </div>
-        <form action="{% url 'checkout' %}" method="POST" id="payment-form">               
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form" enctype="multipart/form-data">               
             {% csrf_token %}
         <div class="row">
             <div class="col-12 col-lg-6 yellow-color order-lg-last mb-5">
@@ -71,7 +71,7 @@
                         {{ order_form.description | as_crispy_field }}
                     </div>
                     <div class="col-6">
-                        {{ order_form.artwork | as_crispy_field }}
+                        {{ order_form.artwork  }}
                     </div>
                 </div>
             </div>
@@ -154,4 +154,11 @@
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+    <script type="text/javascript">
+        $('#new-order-img').change(function {
+            var file = $('#new-order-img')[0].files[0];
+            $('#filename').text(`Images will be set to: ${file.name}`);
+        })
+    </script>
 {% endblock %}
+
