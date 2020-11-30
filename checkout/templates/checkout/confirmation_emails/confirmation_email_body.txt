@@ -1,0 +1,22 @@
+Hello {{ order_full_name }}!
+
+This is a confirmation of your order at GraphCenter. Your order Information is below: 
+
+Order Number: {{ order.order_number }}
+Order Date: {{ Order.date }}
+
+Order_Total: €{{ order.order_total }}
+Tax:       €{{ order.vat }}
+Grand_Total: €{{ order.grand_total }}
+
+We've got your phone number on file as {{ order.phone_number }}
+
+In case you have ordered physical material, we will deliver them to {{ order.street_address }} in {{ order.city }}, {{ order.country }}
+
+Please keep in mind our employees might seek an audience with you via E-mail on the address you have provided; {{ order.email }}
+
+Thank you for your order!
+
+sincerely,
+
+GraphCenter
