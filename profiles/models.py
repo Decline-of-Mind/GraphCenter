@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_company_name = models.CharField(max_length=50, null=True, blank=True)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
-    default_country = CountryField(multiple=False, blank_label='(select country)', null=False, blank=True)
+    default_country = CountryField(multiple=False, blank_label='Select Country', null=False, blank=True)
     default_city = models.CharField(max_length=40, null=True, blank=True)
     default_zipcode = models.CharField(max_length=20, null=True, blank=True)
     default_street_address = models.CharField(max_length=80, null=True, blank=True)
