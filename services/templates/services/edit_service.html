@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="container">
+        <div class="row yellow-color mt-5">
+            <div class="col-12 col-md-6 mt-4">
+                <hr class="hr-white w-100">
+                <h2 class="logo-font">Service Management</h2>
+                <h5>Edit a Service</h5>
+                <hr class="hr-white w-100">
+            </div>
+        </div>
+
+        <div class="row yellow-color pb-5 mb-5">
+            <div class="col-12 col-md-6 mt-4">
+                <form method="POST" action="{% url 'add_service' service.id %}" class="form mb-2" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="text-right">
+                        <a href="{% url 'services' %}" class="btn red-btn rounded-0">Cancel</a>
+                        <button type="submit" class="btn yellow-btn round-0">Update Service</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+
+{% endblock %}
+

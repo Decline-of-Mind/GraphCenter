@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.contrib import messages
+
 from .models import Service, Category
 
 from .forms import ServiceForm
@@ -49,11 +51,35 @@ def add_service(request):
 
     else:
         form = ServiceForm()
-    
-    
+
     template = 'services/add_service.html'
     context = {
         'form': form,
+    }
+
+    return render(request, template, context)
+
+def edit_service(request, service_id):
+    """Edit a Service in the store"""
+
+    service = get_object_or_404(Service, pk=service_id)
+
+    if request.method == "POST":
+        form = ServiceForm(request.POST, request.FILES, instance=service)
+        if form.is_valid():
+            form.save()
+            message.success(request, 'Successfully Updated the Service')
+            return redirect(reverse('service_detail', args=[service_id]))
+        else:
+            messages.error(request, 'Failed to Update the Service. Please ensure the form is valid.')
+
+    form = ServiceForm(instance=service)
+    messages.info(request, f' You are editing { service.name }')
+
+    template = 'services/edit_service.html'
+    context = {
+        'form': form,
+        'service': service
     }
 
     return render(request, template, context)
