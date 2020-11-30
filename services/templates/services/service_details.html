@@ -39,7 +39,7 @@
                 </small>
             {% endif %}
             <div class="order-container">
-                {% if request.useris_authenticated %}
+                {% if request.user.is_authenticated %}
                 <form id="add_to_cart" action="{% url 'add_to_cart' service.id %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" name="add_service" class="float-right yellow-btn btn font-weight-bold rounded-4 mb-3 mt-lg-3">ADD TO CART</button>

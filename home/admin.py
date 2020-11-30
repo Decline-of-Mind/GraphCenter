@@ -5,4 +5,8 @@ from .models import Contact
 
 class ContactAdmin(admin.ModelAdmin):
     model = Contact
-    readonly_fields = '__all__'
+    readonly_fields = ('user_email', 'subject', 'body', 'date')
+
+
+
+admin.site.register(Contact, ContactAdmin)

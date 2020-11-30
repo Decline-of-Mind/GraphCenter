@@ -16,8 +16,6 @@ import stripe
 import json
 
 
-
-
 @require_POST
 def cache_checkout_data(request):
     try:
@@ -40,23 +38,24 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
+        order_form = OrderForm(request.POST)
         cart = request.session.get('cart', {})
 
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
+            'company_name': request.POST['company_name'],
             'phone_number': request.POST['phone_number'],
+            'description': request.POST['description'],
             'country': request.POST['country'],
             'zipcode': request.POST['zipcode'],
             'city': request.POST['city'],
-            'company_name': request.POST['company_name'],
-            'region': request.POST['region'],
-            'street_address': request.POST['street_address'],
-            'second_address': request.POST['second_address'],
-            'description': request.POST['description'],
+            'street_address1': request.POST['street_address'],
+            'street_address2': request.POST['second_address'],
+            'county': request.POST['region'],
         }
 
-        order_form = OrderForm(form_data, request.FILES)
+        order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
@@ -73,8 +72,6 @@ def checkout(request):
                            quantity=item_data,
                         )
                         order_line_item.save()
-                    else:
-                        messages.error(request, 'Processing error')
                 except Service.DoesNotExist:
                     messages.error(request, (
                         "One of the services in your cart wasn't found in our database."
@@ -87,7 +84,8 @@ def checkout(request):
             return redirect(reverse('checkout_success', args=[order.order_number]))
 
         else:
-            messages.error(request, "Error with your form detected")
+            messages.error(request, 'There was an error with your form. \
+                Please double check your information.')
 
     else:
         cart = request.session.get('cart', {})

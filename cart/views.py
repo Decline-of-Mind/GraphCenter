@@ -8,13 +8,13 @@ from services.models import Service
 
 # Create your views here.
 
-
+@login_required
 def view_cart(request):
     """ view for the shopping cart """
 
     return render(request, 'cart/cart.html')
 
-
+@login_required
 def add_to_cart(request, item_id):
     """ Add a product to the shopping cart"""
 
@@ -37,7 +37,7 @@ def add_to_cart(request, item_id):
     request.session['cart'] = cart
     return redirect(redirect_url)
 
-
+@login_required
 def delete_from_cart(request, item_id):
 
     '''Removes service from the cart'''

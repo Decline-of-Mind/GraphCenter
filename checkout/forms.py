@@ -1,5 +1,4 @@
 from django import forms
-from .widgets import CustomClearableFileInput
 from .models import Order
 
 
@@ -8,9 +7,7 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = ('full_name', 'company_name', 'email', 'phone_number',
                   'country', 'region', 'city', 'street_address', 'zipcode',
-                  'second_address', 'artwork', 'description', 'status')
-
-    artwork = forms.ImageField(label='artwork', required=False, widget=CustomClearableFileInput)
+                  'second_address', 'description',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -29,9 +26,7 @@ class OrderForm(forms.ModelForm):
                 'street_address': 'Street Address',
                 'zipcode': 'Postal Code',
                 'second_address': '2nd Street Address',
-                'artwork': 'Your Artwork',
                 'description': 'Max 250 characters',
-                'status': 'status',
             }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True

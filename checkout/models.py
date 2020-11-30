@@ -7,22 +7,11 @@ from django.db.models import Sum
 from services.models import Service
 from profiles.models import UserProfile
 
-# Makes a dynamic path for the images provided by the user
-
-
-def user_directory_path(instance, filename):
-    return 'customer_images/user_{0}/{1}'.format(instance.user.id, filename)
-
 
 class Order(models.Model):
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
     date = models.DateTimeField(auto_now_add=True)
-    STATUS = (
-        ('requested', 'Requested'),
-        ('pending', 'Pending'),
-        ('finished', 'Finished')
-    )
 
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, 
                                     null=True, blank=True, related_name='orders')
@@ -38,8 +27,6 @@ class Order(models.Model):
     second_address = models.CharField(max_length=80, null=True, blank=True)
     region = models.CharField(max_length=80, null=True, blank=True)
 
-    artwork = models.FileField(
-        upload_to=user_directory_path, blank=True, null=True)
     description = models.TextField(max_length=250, blank=True, null=True)
 
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
@@ -48,8 +35,6 @@ class Order(models.Model):
 
     original_cart = models.TextField(null=False, blank=False, default='')
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
-    status = models.CharField(
-        choices=STATUS, default='requested', max_length=10)
 
     def _generate_order_number(self):
         '''
